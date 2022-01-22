@@ -14,7 +14,7 @@ describe('Todos API', () => {
 	})
 	test('GET/todos should get the todo array', async () => {
 		const response = await request(app).get('/todos')
-		expect(response.body).toEqual(
+		expect(response.body).toStrictEqual(
 			expect.arrayContaining([
 				expect.objectContaining({
 					id: expect.any(Number),
@@ -22,6 +22,16 @@ describe('Todos API', () => {
 					completed: expect.any(Boolean),
 				}),
 			])
+		)
+	})
+	test('GET/todos/:id should get the todo with the specific id', async () => {
+		const response = await request(app).get('/todos/1')
+		expect(response.body).toStrictEqual(
+			expect.objectContaining({
+				id: expect.any(Number),
+				name: expect.any(String),
+				completed: expect.any(Boolean),
+			})
 		)
 	})
 })
