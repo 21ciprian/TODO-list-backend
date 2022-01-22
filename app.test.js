@@ -39,4 +39,15 @@ describe('Todos API', () => {
 		const response = await request(app).get('/todos/9999')
 		expect(response.status).toBe(404)
 	})
+	test('POST/todos/ should create a new todo', async () => {
+		const response = await request(app)
+			.post('/todos')
+			.send({name: 'Second todo', completed: false})
+		expect(response.body).toStrictEqual(
+			expect.objectContaining({
+				name: 'Second todo',
+				completed: false,
+			})
+		)
+	})
 })

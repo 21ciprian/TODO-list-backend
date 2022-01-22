@@ -14,8 +14,14 @@ router.get('/:id', function (req, res, next) {
 	res.json(foundTodo)
 })
 router.post('/', function (req, res, next) {
-	const foundTodo = todos.find(todo => todo.id === Number(req.params.id))
-	res.json(foundTodo)
+	const {body} = req
+	const newTodo = {
+		id: todos.length + 1,
+		name: body.name,
+		completed: false,
+	}
+	todos.push(newTodo)
+	res.json(newTodo)
 })
 
 export default router
