@@ -8,6 +8,13 @@ router.get('/', function (req, res, next) {
 })
 router.get('/:id', function (req, res, next) {
 	const foundTodo = todos.find(todo => todo.id === Number(req.params.id))
+	if (!foundTodo) {
+		return next(res.status(404))
+	}
+	res.json(foundTodo)
+})
+router.post('/', function (req, res, next) {
+	const foundTodo = todos.find(todo => todo.id === Number(req.params.id))
 	res.json(foundTodo)
 })
 

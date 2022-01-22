@@ -24,6 +24,7 @@ describe('Todos API', () => {
 			])
 		)
 	})
+
 	test('GET/todos/:id should get the todo with the specific id', async () => {
 		const response = await request(app).get('/todos/1')
 		expect(response.body).toStrictEqual(
@@ -33,5 +34,9 @@ describe('Todos API', () => {
 				completed: expect.any(Boolean),
 			})
 		)
+	})
+	test('GET/todos/:id should 404 if not found', async () => {
+		const response = await request(app).get('/todos/9999')
+		expect(response.status).toBe(404)
 	})
 })
