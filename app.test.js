@@ -12,4 +12,16 @@ describe('Todos API', () => {
 		const response = await request(app).get('/todos')
 		expect(response.headers['content-type']).toMatch(/json/)
 	})
+	test('GET/todos should get the todo array', async () => {
+		const response = await request(app).get('/todos')
+		expect(response.body).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					id: expect.any(Number),
+					name: expect.any(String),
+					completed: expect.any(Boolean),
+				}),
+			])
+		)
+	})
 })
