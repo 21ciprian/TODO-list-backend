@@ -50,4 +50,10 @@ describe('Todos API', () => {
 			})
 		)
 	})
+	test('POST/todos/ should return 400 if name is not string', async () => {
+		const response = await request(app)
+			.post('/todos')
+			.send({name: 111, completed: false})
+		expect(response.status).toBe(400)
+	})
 })

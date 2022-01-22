@@ -20,8 +20,11 @@ router.post('/', function (req, res, next) {
 		name: body.name,
 		completed: false,
 	}
+	if (typeof newTodo.name !== 'string') {
+		return next(res.status(400))
+	}
 	todos.push(newTodo)
-	res.json(newTodo)
+	res.status(201).json(newTodo)
 })
 
 export default router
